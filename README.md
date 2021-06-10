@@ -1,3 +1,3 @@
-# GT_CSE6242
+# GT_Data and Visual Analytics
 
 https://youtu.be/GWtwyY1tCYk
