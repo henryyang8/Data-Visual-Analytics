@@ -1,0 +1,35 @@
+﻿The tourist attractions suggested by these apps are attractive. [Google Maps],The tourist attractions suggested by these apps are attractive. [TripAdvisor],The tourist attractions suggested by these apps are attractive. [Team59],The tourist attractions suggested by these apps are easy to get to. [Google Maps],The tourist attractions suggested by these apps are easy to get to. [TripAdvisor],The tourist attractions suggested by these apps are easy to get to. [Team59],"Overall speaking, I am satisfied with the tourist spots recommended by these apps. [Google Maps]","Overall speaking, I am satisfied with the tourist spots recommended by these apps. [TripAdvisor]","Overall speaking, I am satisfied with the tourist spots recommended by these apps. [Team59]",The apps' user interfaces are intuitive. [Google Maps],The apps' user interfaces are intuitive. [TripAdvisor],The apps' user interfaces are intuitive. [Team59],It is easy to create an itinerary using the apps. (Itinerary = places to visit + route connecting the places).  [Google Maps],It is easy to create an itinerary using the apps. (Itinerary = places to visit + route connecting the places).  [TripAdvisor],It is easy to create an itinerary using the apps. (Itinerary = places to visit + route connecting the places).  [Team59],"Overall speaking, I am satisfied with the apps' user interfaces. [Google Maps]","Overall speaking, I am satisfied with the apps' user interfaces. [TripAdvisor]","Overall speaking, I am satisfied with the apps' user interfaces. [Team59]",How likely will you recommend Team59 to a friend?,What additional features would you like to see in Team59?,Anything else you want to tell Team59?,Which city are you currently in?
+4,2,4,4,3,2,4,3,4,4,4,3,3,3,4,4,4,3,3,Loading indicator to let user know algorithm is calculating the options to select from. Possibly add a way to get the menu for a place from an API?,,Charlotte
+2,3,4,2,3,4,2,4,4,3,4,3,2,4,4,4,4,4,3,,,Hong Kong
+4,4,5,4,4,5,3,4,5,4,4,4,3,4,4,4,4,5,5,,,Hong Kong
+4,3,4,4,3,4,4,3,4,4,3,4,3,3,4,4,3,3,4,,,Taipei
+3,4,4,4,4,4,4,4,4,4,4,2,3,3,4,4,4,4,4,"indication when a location is selected. the delay time means I click on it multiple times. Also notify if location is ""not found"". It couldn't find ""georgia tech"" well.","overall, great idea and useful utility. Many parts were intuitive to use but some crucial parts meant a rocky user experience",boston
+2,4,4,2,3,4,2,3,4,3,4,1,4,2,4,5,5,3,3,"Rather than a graph with the ratings, a ranked list that appears with a small picture and and short description of the place along with the rating. That would be more intuitive to click on.","Really cool idea. It just took me a while to figure out that you click on the bar graph to add the attraction to the itinerary.  I also had to complete my search a few times, with a few different places until Buckingham Palace worked. Once I figured everything out, the map tool was very cool. That was my favorite part of the app and that is an awesome idea to be able to put in a list of locations and have the route be calculated. That was easier to use than Google Maps as you can't submit a list of locations to Google Maps (that I am aware of). Overall though, really solid idea and good job!!!",Los Angeles
+4,5,4,5,5,5,4,4,4,5,5,4,4,4,5,4,4,4,4,,,Santa Clara
+3,3,4,3,3,4,4,4,4,4,4,4,4,4,4,4,4,4,3,,I think the restaurant query returns hotels instead,Washington DC
+3,5,4,2,4,5,2,4,4,3,4,4,3,3,3,3,4,3,3,,,los angles
+5,4,4,5,4,4,5,4,4,5,4,5,5,4,4,5,4,5,5,1) Address of the place is not visible at first glance. 2) hitting the clear button clears the results but not the input term we used,Overall the app is very good. Very nice job! All the best for future projects,Chennai
+4,5,2,4,4,2,4,4,2,5,4,1,5,2,4,5,5,2,3,"Besides the rating for the Top 5 recommendations, more pictures and introductions would like to be added to make the information more attractive and intuitive.","It is a little bit difficult to understand the function logic of Team59 at first glance. Besides top 5 recommendation, other choices would also like to be displayed as different people have different taste.",Shanghai
+4,4,5,4,4,4,4,4,4,4,2,2,4,2,5,4,3,4,5,,,taipei
+4,0,3,4,0,3,4,0,3,3,0,3,5,0,4,4,0,3,2,Relevant suggestions and better usability experience ,Idea is interesting and can be made better,Bangalore
+5,4,4,4,5,4,5,5,4,5,5,4,5,2,4,5,4,4,3,It would be good to save a location as well. A brief description of the place suggested and what activities can be done there.,"These days nobody will take a print out and go for a trip. It would be good if it was an app, that way its more accessible for the users.",Bangalore
+4,5,4,5,4,4,4,5,4,4,5,3,4,5,3,4,4,3,4,"The places suggested were ranked with distance but did not see the distance as a factor, but current user distance was not an input option. Second, for travelling to a new city, the user does not know any tourist attraction; hence will be nice to see a google link in the graph",the UI design could be improved,"Bengaluru, India"
+3,4,4,4,2,4,3,3,4,4,2,3,4,2,4,4,2,4,4,photos of suggested places,none,Kyoto
+4,3,2,5,4,3,4,3,3,5,3,3,5,3,3,4,3,3,2,"It is better to show the map in the home page, which is more intuitive",The search results are not as what I expected,Taipei
+5,4,4,4,4,4,4,5,2,5,4,2,5,3,4,5,4,3,3,"More than five options can be provided with descriptions, alignments on git could be done better for mobile viewing",,Singapore 
+3,2,4,3,3,3,3,3,4,4,2,5,4,2,5,4,2,5,4,,,taipei
+5,4,4,4,4,4,4,5,2,5,4,2,5,3,4,5,4,3,3,"More than five options can be provided with descriptions, alignments on git could be done better for mobile viewing",,Singapore 
+4,4,4,4,2,5,3,3,4,4,3,4,3,2,4,4,3,4,4,Mobile version,,Kyoto Japan
+3,4,4,4,2,4,3,3,4,4,3,4,4,2,5,4,3,4,4,picture of place,nice app,Tokyo
+5,5,5,5,5,5,5,5,5,4,4,3,4,3,5,4,4,3,4,Clicking on the bar chart to add locations was non-intuitive (until I read the directions ;) ) Maybe add a pop up the first time a user searches for a location telling them to click on a bar?  Also need an option to delete from the current itinerary in case things were added by accident without clearing the whole list,,"Boston, MA"
+5,5,3,4,4,4,4,4,3,4,4,4,4,4,4,4,4,2,2,,,Atlanta
+4,5,4,5,4,5,4,5,5,5,5,5,5,4,5,5,5,5,4,links or introduction to recommended places in tooltips,It recommended good places in Boston to visit,Boston
+4,4,4,4,3,5,4,4,4,4,3,4,4,2,5,4,3,4,4,more then 5 choice,,tokyo
+5,5,5,4,3,4,4,4,4,5,2,4,4,2,5,4,2,4,5,Hotel,Good app,Osaka
+4,4,4,3,2,4,4,3,4,4,4,4,4,2,5,4,3,4,4,opening hours,,Hong Kong
+4,4,2,4,4,4,4,4,2,4,4,3,4,3,4,3,3,3,2,Photos of the restaurant and tourist attractions,only 5 choices is it designed for short trip?,Hong Kong
+4,4,4,4,3,5,4,4,4,4,3,4,5,2,5,4,4,4,4,more information on tourist place,make UI more user friendly,Macau
+5,4,0,5,3,0,4,3,0,5,3,0,4,3,0,5,3,0,1,Don't know the brand,Don't know the brand,"Shanghai, China"
+4,5,5,4,2,4,4,3,4,5,4,3,3,2,5,4,3,4,5,"set different type of restaurant eg Western food, Asian food",some places are not open to public,Macau
+,,,,3.34375,3.90625,,,,4.21875,3.53125,3.25,4,2.78125,4.125,4.1875,3.46875,3.53125,3.53125,,,
+,,,,,,,,,,,,,,,,,,1.015504801,,,

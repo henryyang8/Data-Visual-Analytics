@@ -1,0 +1,329 @@
+<!doctype html>
+<html>
+
+
+<head>
+  <title>Tourist recommendation App</title>
+  <style>
+  .view-update {
+  height: 200px;
+}
+
+.table td th {
+  text-align: center;
+}
+
+
+  </style>
+  <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src = "https://code.highcharts.com/highcharts.js"></script>  
+</head>
+
+<!-- REFERENCE: https://www.w3schools.com/bootstrap/bootstrap_jumbotron_header.asp --> 
+<div class="container">
+  <div class="jumbotron view-update text-center" >
+    <h1>Tourist Recommendation App</h1>      
+    <p>A simple, effective and fastest way to explore and prepare the iternary for a given locality</p>
+  </div>
+  <p><b>Note:</b> Our app uses our own <b>Customized Rating </b> <i>("Our Rating")</i> using Bayes algorithim at the backend, scaling the distance,ratings & penalty to provide you the best 5 options on each search.We first applied a Bayesian model to balance the number of ratings with the actual ratings themselves. Then, we adjusted the result based on estimated distance from the user. Locations that are further away from the current location will receive a higher penalty on their final scores. The top five results are shown as recommendations to the user! </p>  
+  <p><b>Instructions:</b></p>
+  <ol>
+    <li>Please enter a city name & a place within the city (optional) e.g., "London" or "London Big Ben"</li>
+    <li>Please select your search preference (tourist attraction / restaurant) and click search</li>
+    <li>Please select one of the five recommended places. Your selection will be added to the itinerary, and the next five recommendations will be loaded</li>
+    <li>When you are done, click the "print" button to print the itinerary, or click the "map" button to visualize the routes.</li>
+  </ol>
+</div>
+
+
+<div class="container-fluid">
+  <input type="text" id="place" placeholder="Enter the Place Name">
+  
+  <label>Select the search Preference:</label>
+  <select name="preference" id="preference">
+    <option value="restaurant">Restaurant</option>
+    <option value="tourist_attraction">Tourist Attraction</option>
+  </select>
+
+  <button type="button" class="btn btn-info" id="enterBtn">
+    <span class="glyphicon glyphicon-search"></span> Search
+  </button>
+
+  <button type="button" class="btn btn-info" id="clearBtn">
+    <span class="glyphicon glyphicon-remove-circle"></span> Clear
+  </button>
+
+</div>
+
+
+
+<div class="container-fluid">
+		<div class="col-xs-12">
+			<div class="row">
+
+				<div class="col-xs-6" id="responseArea">
+          <h3 class="text-center" id="header_val1">Top 5 suggestions using our rating</h3>
+          <h4 class="text-center" id="header_val2">(Please select a location below to continue with the iternary)</4> 
+        </div>
+        
+				<div class="col-xs-6" id="iternaryPlan">
+          <table class="table table-bordered"> 
+            <h3 class="text-center" id="itPlanHead">Itinerary Plan</h3>
+            <button type="button" class="btn btn-primary hidden-print" id="printBtn" onclick="printIternary('iternaryPlan')">
+              <span class="glyphicon glyphicon-print" aria-hidden="true"></span> Print
+            </button>
+            
+            <a href=map><button type="button" class="btn btn-info" id="mapBtn">
+              <span class="glyphicon glyphicon-map-marker"></span> Map
+            </a></button>
+            <thead id="thead"> 
+              <tr> 
+                <th class="text-center" width="60%">Selected Location</th> 
+                <th class="text-center" width="20%">Our Rating</th> 
+                <th class="text-center" width="20%">Distance from Previous (in meters)</th>
+              </tr> 
+            </thead> 
+            <tbody id="tbody"> 
+            </tbody>
+          </table>
+        </div>
+        
+			</div>
+		</div>
+</div>
+
+
+<body>
+<script>
+//Reference: https://jsfiddle.net/6cz5br7m/
+function printIternary(iternaryArea) {
+     var printContents = document.getElementById(iternaryArea).innerHTML;
+     var originalContents = document.body.innerHTML;
+     document.body.innerHTML = printContents;
+     window.print();
+     document.body.innerHTML = originalContents;
+}
+
+var selectedArray = [];
+var selectedArrayLatLng = [];
+document.getElementById("clearBtn").disabled = true;
+
+
+var svg2 = d3.select("#iternaryPlan").append("svg")
+      .attr("width", 400)
+      .attr("height", 800);
+
+// ON ENTER BUTTON
+d3.select('#enterBtn').on('click', function()
+  {
+    localStorage.clear();
+    var placeName = d3.select('#place').node().value;
+    var pref = document.getElementById("preference").value;
+    d3.json("/get-data/" + placeName + "@" + pref, function (error, response) {
+	  source = response.name+"^"+response.lat+"#"+response.lng
+      selectedArray.push(placeName);
+	  selectedArrayLatLng.push(source)
+      getData(response);
+    });
+  });
+
+// ON CLEAR BUTTON 
+d3.select('#clearBtn').on('click', function()
+  {
+    d3.select("svg").remove();
+    d3.selectAll("td").remove();
+    d3.select('#place').node().value = '';
+    selectedArray = [];
+    selectedArrayLatLng = [];
+  });
+
+    function getData(response)
+    {
+      document.getElementById("clearBtn").disabled = false;
+
+      x = 50;
+      y = 0;
+      x_i = 150;
+      y_i = 0;
+
+      // Looping the array and display the iternary
+
+      // Adding a row inside the tbody. 
+      // REFERENCE: https://www.geeksforgeeks.org/how-to-dynamically-add-remove-table-rows-using-jquery/
+      
+      var checkIndex = 0;
+      selectedArray.forEach(function(i){
+        var placeName = '-';
+        var bayes_val = "-";
+        var dist_val = "-";
+        if(checkIndex == 0)
+        {
+          placeName = i;
+        }else{
+          var res_val = i.split("#");
+          placeName = res_val[0];
+          bayes_val = res_val[1];
+          dist_val = res_val[2];
+        }
+
+        checkIndex = checkIndex + 1;
+      $('#tbody').append(`<tr>  
+             <td class="row-index text-center"> 
+             <p>${placeName}</p> 
+             </td> 
+
+             <td class="row-index text-center"> 
+             <p>${bayes_val}</p> 
+             </td>
+
+             <td class="row-index text-center"> 
+             <p>${dist_val}</p> 
+             </td>
+              </tr>`); 
+      });
+
+
+      // Displaying the box and 5 options
+      var nameLoc = [];
+      var ratingLoc = [];
+
+      response.children.forEach(function(d) {
+        nameLoc.push(d.name);
+        var value = parseFloat(d.dist_adj_bayes.toFixed(2));
+        ratingLoc.push(value);
+      });
+
+
+          var chart = {
+               type: 'bar'
+            };
+            var title = {
+               text: 'Top 5 Recomendation based on our Rating'   
+            };
+            var subtitle = {
+            };
+            var xAxis = {
+               categories: nameLoc,
+               labels :{
+                style: {
+                fontSize: '12px',
+                color: 'Black'
+              },
+               },
+               title: {
+                  text: "Location"
+               }
+            };
+            var yAxis = {
+               min: 0,
+               title: {
+                  text: 'Our Rating',
+                  align: 'high'
+               },
+               labels: {
+                  overflow: 'justify'
+               }
+            };
+            var plotOptions = {
+              bar: {
+                  dataLabels: {
+                     enabled: true
+                  }
+               },
+              series: {
+              cursor: 'pointer',
+              point: {
+                    events: {
+                        click: function () {
+                            process_data_before_nextCall(this.category,response);
+                        }
+                    }
+                }
+            }
+            };
+            var legend = {
+            };
+            var credits = {
+            };
+            var series = [
+               {
+                  name: 'Our Rating',
+                  data: ratingLoc
+               }
+            ];
+            var tooltip = {
+            };
+            var subtitle = {
+              text: 'Please select on of the option below'
+            };
+
+      
+            var json = {};   
+            json.chart = chart; 
+            json.title = title;   
+            json.subtitle = subtitle; 
+            json.xAxis = xAxis;
+            json.yAxis = yAxis;  
+            json.series = series;
+            json.plotOptions = plotOptions;
+            json.legend = legend;
+            json.credits = credits;
+            json.tooltip = tooltip;
+            $('#responseArea').highcharts(json);
+      };
+
+ 
+  // Buffer function 
+  function process_data_before_nextCall (selectedName, response)
+  {
+    response.children.forEach(function(d) {
+        if(d.name == selectedName)
+        {
+          getNextCall(d.name + "#" + d.dist_adj_bayes.toFixed(2) + "#" + d.dist.toFixed(2),d.lat,d.lng);
+        }
+
+      });
+  }
+
+  // Get Next Calls
+  function getNextCall(obj, lat, lng){
+    var pref = document.getElementById("preference").value;
+    var res_val = obj.split("#");
+    var name = res_val[0];
+   
+    d3.json("/get-data/" + name + "@" + pref, function (error, reponseChild) {
+              d3.select("svg").remove();
+              d3.selectAll("td").remove();
+              if(reponseChild.children.length > 0)
+              {
+                selectedArray.push(obj);
+                selectedArrayLatLng.push(name + '^' + String(lat) + '#' + String(lng));
+                getData(reponseChild);
+                mapData(selectedArrayLatLng);
+              }else{
+                alert("No response found for this request. Please retry other location");
+              }
+
+    })
+
+  };
+
+  function mapData(selectedArrayLatLng){
+    var i=0
+    localStorage.clear
+    selectedArrayLatLng.forEach(function(d) {
+    localStorage.setItem("itinerary"+i,d)
+    i = i+1
+    })
+  }
+
+ 
+
+  
+</script>
+</body>
+
+</html>
